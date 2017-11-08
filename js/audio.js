@@ -11,6 +11,8 @@ function setup(){
     song.loop();
     fft = new p5.FFT(0.7);
     fft.setInput(song);
+    analyzer = new p5.Amplitude();
+    analyzer.setInput(song);
     w = width / 64;
 }
 
@@ -19,7 +21,7 @@ function draw(){
     var spectrum = fft.analyze();
     translate(95,0,-300);
     rotateY(PI/2);
-    translate(-3*frameCount,sin(frameCount*0.02)*150+50,0);
+    translate(-3*frameCount,sin(frameCount*0.02+50)*150,0);
     push();
         for(var j = 3; j > 1; j--){
                 for(var i = 0; i < spectrum.length; i++){
@@ -33,6 +35,11 @@ function draw(){
             translate(0,0,-200);
         }
     pop();
+    var rms = analyzer.getLevel();
+    rotateX(frameCount*0.01);
+    translate(3*frameCount, 0, 400);
+    sphere(20+rms*30);
+        
 }
 
 function pause(){
