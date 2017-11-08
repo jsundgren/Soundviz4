@@ -6,7 +6,7 @@ html {
 body {
     width:100%;
     margin:0 auto;
-    background-color:#fff656;
+    background-color:black;
 }
 
 #ppToggle{
@@ -25,5 +25,6 @@ canvas{
     left:12%;
     margin:0 auto;
     position: absolute;
-    border: solid 10px #86ff4f;
+    border: 10px #86ff4f;
+    border-style: solid dashed;
 }
