@@ -9,31 +9,28 @@ function preload(){
 function setup(){
     createCanvas(0.75*windowWidth, 0.75*windowHeight,WEBGL);
     song.loop();
-    fft = new p5.FFT(0.8,64);
+    fft = new p5.FFT(0.7);
     fft.setInput(song);
     w = width / 64;
 }
 
 function draw(){
-    background(255);
+    background(0);
     var spectrum = fft.analyze();
-    translate(-width/2,0,-1000);
-    rotateX(PI/6);
-    //rotateY(frameCount*0.01);
+    translate(95,0,-300);
+    rotateY(PI/2);
+    translate(-3*frameCount,sin(frameCount*0.02)*150+50,0);
     push();
-        for(var j = 10; j > 1; j--){
-            
-            push();
+        for(var j = 3; j > 1; j--){
                 for(var i = 0; i < spectrum.length; i++){
                     var amp = spectrum[i];
                     var y = map(amp, 0, 255, 0, height);
                     push();
                         translate(2*i*w,0,0);
                         box(w, y, 20);
-                    pop();   
+                    pop();
                 }
-            pop();
-            translate(0,0,-100);
+            translate(0,0,-200);
         }
     pop();
 }
