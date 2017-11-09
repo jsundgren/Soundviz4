@@ -25,19 +25,19 @@ function draw(){
     push();
         translate(3*frameCount,cos(frameCount*0.02+50)*50,0);
         push();
-        translate(-500,0,-100);
-        rotateZ(-frameCount*0.1);
-        var rms = analyzer.getLevel();
-        sphere(20+rms*35);
+            translate(-500,0,-100);
+            rotateZ(-frameCount*0.1);
+            var rms = analyzer.getLevel();
+            sphere(20+rms*35);
         pop();
     pop();
     push();
-        for(var j = 3; j > 1; j--){
-                for(var i = 0; i < spectrum.length; i++){
+        for(var j = 0; j < 2; j++){
+            for(var i = 0; i < spectrum.length; i++){
                     var amp = spectrum[i];
                     var y = map(amp, 0, 255, 0, height);
                     push();
-                        translate(2*i*w,0,0);
+                        translate(2*i*w,0,sin(frameCount*0.02)*35);
                         box(w, y, 20);
                     pop();
                 }
