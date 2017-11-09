@@ -23,6 +23,15 @@ function draw(){
     rotateY(PI/2);
     translate(-3*frameCount,sin(frameCount*0.02+50)*150,0);
     push();
+        translate(3*frameCount,cos(frameCount*0.02+50)*50,0);
+        push();
+        translate(-500,0,-100);
+        rotateZ(-frameCount*0.1);
+        var rms = analyzer.getLevel();
+        sphere(20+rms*35);
+        pop();
+    pop();
+    push();
         for(var j = 3; j > 1; j--){
                 for(var i = 0; i < spectrum.length; i++){
                     var amp = spectrum[i];
@@ -35,11 +44,6 @@ function draw(){
             translate(0,0,-200);
         }
     pop();
-    var rms = analyzer.getLevel();
-    rotateX(frameCount*0.01);
-    translate(3*frameCount, 0, 400);
-    sphere(20+rms*30);
-        
 }
 
 function pause(){
