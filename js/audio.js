@@ -3,42 +3,45 @@ var w;
 var filter;
 
 function preload(){
-    song = loadSound('yesterye.mp3');
+    song = loadSound('ss.ogg');
 }
 
 function setup(){
     createCanvas(0.75*windowWidth, 0.75*windowHeight,WEBGL);
     song.loop();
-    fft = new p5.FFT(0.5,128);
+    fft = new p5.FFT(0.7);
     fft.setInput(song);
     analyzer = new p5.Amplitude();
     analyzer.setInput(song);
-    w = width / 128;
+    w = width / 64;
 }
 
 function draw(){
-    background(173,226,255);
+    background(0);
     var spectrum = fft.analyze();
-    var rms = analyzer.getLevel();
-    translate(0,0,-1600);
-    rotateX(-frameCount*0.001);
-    scale(0.3,0.3,0.3);
+    translate(95,0,-300);
+    rotateY(PI/2);
+    translate(-3*frameCount,sin(frameCount*0.02+50)*150,0);
     push();
-        noFill();
-        rotateY(-frameCount*0.01);
-        sphere(3000+rms*800);
+        translate(3*frameCount,cos(frameCount*0.02+50)*50,0);
+        push();
+            translate(-500,0,-100);
+            rotateZ(-frameCount*0.1);
+            var rms = analyzer.getLevel();
+            sphere(20+rms*35);
+        pop();
     pop();
-    rotateY(frameCount*0.015);
     push();
-        for(var i = 0; i < spectrum.length; i++){
-            var amp = spectrum[i];
-            var y = map(amp, 0, 255, 0, 11.5*height);
-            fill(255);
-            stroke(0);
-            push();
-                translate(2.6*i*w,0,0);
-                box(w, y, 60);
-            pop();
+        for(var j = 0; j < 2; j++){
+            for(var i = 0; i < spectrum.length; i++){
+                    var amp = spectrum[i];
+                    var y = map(amp, 0, 255, 0, height);
+                    push();
+                        translate(2*i*w,0,sin(frameCount*0.02)*35);
+                        box(w, y, 20);
+                    pop();
+                }
+            translate(0,0,-200);
         }
     pop();
 }
